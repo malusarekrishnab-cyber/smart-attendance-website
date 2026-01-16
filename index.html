@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Attendance System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0d6efd, #084298);
+      color: white;
+      text-align: center;
+      padding: 35px 15px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    section {
+      background: white;
+      margin: 15px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    section h2 {
+      color: #0d6efd;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    section h3 {
+      margin-top: 15px;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    pre {
+      background: #f1f1f1;
+      padding: 12px;
+      overflow-x: auto;
+      font-size: 13px;
+      border-left: 4px solid #0d6efd;
+      margin-top: 10px;
+    }
+
+    footer {
+      background: #0d6efd;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 20px;
+    }
+
+    footer p {
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 22px;
+      }
+
+      section h2 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Smart Attendance System</h1>
+    <p>RFID & Firebase Based Attendance Management</p>
+  </header>
+
+  <section>
+    <h2>About Project</h2>
+    <p>
+      Smart Attendance System is designed to automate the attendance process
+      in colleges. This system reduces manual work, avoids proxy attendance,
+      and provides accurate and secure attendance records for students and teachers.
+    </p>
+  </section>
+
+  <section>
+    <h2>Key Features</h2>
+    <ul>
+      <li>Attendance using RFID cards</li>
+      <li>Student can view own attendance</li>
+      <li>Teacher can view month-wise attendance</li>
+      <li>Automatic attendance calculation</li>
+      <li>No manual editing of data</li>
+      <li>Secure data storage using Firebase</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>RFID Working</h2>
+    <ol>
+      <li>RFID card is scanned by the reader</li>
+      <li>UID is read using Arduino / NodeMCU</li>
+      <li>Data is sent to Firebase database</li>
+      <li>Attendance is updated in Android application</li>
+    </ol>
+
+    <h3>Sample RFID Code (Reference Only)</h3>
+    <pre>
+#include &lt;SPI.h&gt;
+#include &lt;MFRC522.h&gt;
+
+#define SS_PIN 10
+#define RST_PIN 9
+
+MFRC522 rfid(SS_PIN, RST_PIN);
+
+void setup() {
+  Serial.begin(9600);
+  SPI.begin();
+  rfid.PCD_Init();
+}
+
+void loop() {
+  if (!rfid.PICC_IsNewCardPresent()) return;
+  if (!rfid.PICC_ReadCardSerial()) return;
+
+  for (byte i = 0; i &lt; rfid.uid.size; i++) {
+    Serial.print(rfid.uid.uidByte[i], HEX);
+  }
+  Serial.println();
+}
+    </pre>
+  </section>
+
+  <section>
+    <h2>Technology Used</h2>
+    <ul>
+      <li>Android (Java & XML)</li>
+      <li>Firebase Realtime Database</li>
+      <li>HTML & CSS</li>
+      <li>RFID Reader (MFRC522)</li>
+      <li>Arduino / NodeMCU</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>Presented By:</strong></p>
+    <p>Krushna Malusar</p>
+    <p>Krushna Khawle</p>
+
+    <br>
+
+    <p><strong>Guide Name:</strong></p>
+    <p>Deshpande Mam</p>
+
+    <br>
+
+    <p><strong>College Name:</strong></p>
+    <p>Gurukul Institute of Technology, Bhokardan</p>
+
+    <br>
+
+    <p>Diploma Computer Engineering Project</p>
+  </footer>
+
+</body>
+</html>
